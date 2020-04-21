@@ -1,4 +1,4 @@
- var friendsArray = require ("../data/friends");
+ var friends = require ("../data/friends");
 
  module.exports = function(app){
 // when api friends page is visited
@@ -11,39 +11,40 @@
          // logic to compare req object scores to all scores existing objects in friends array?
         
         let newScores = req.body.scores;
-      
+        let totalDiff = 10000000;
+        let matchName = "";
+        let matchPhoto = "";
         console.log(newScores);
         // for every friend object in the friend array..
-        for (var i=0; i<friendsArray.length;i++){
-            console.log(friendsArray[i].scores);
-            let newScores = req.body.scores;
-        let totalDiff = 0;
-        let largestDiff = 0;
-        let matchName = "";
-        let diffArray=[];
-            
+        for (var i=0; i<friends.length;i++){
+            console.log(friends[i].scores);
+          
+            let difference = 0;
             //for each item in the score array in that  particular object that is an iteration of the friend array, if...
-            for (var j =0;j<friendsArray[i].scores.length;j++){
-                console.log(friendsArray[i].scores[j]);
-                console.log(newScores[j]);
-                // let difference = Math.abs(newScores[j]-parseInt(friendsArray[i].scores[j]));
-                //  totalDiff +=difference;
-                //  diffArray.push({diff: totalDiff,name:friendsArray[i].name});
-                 
-                //  console.log(diffArray);
-                
+            for (var j =0;j<friends[i].scores.length;j++){
+                // console.log(friendsArray[i].scores[j]);
+                // console.log(newScores[j]);
+                difference += Math.abs(newScores[j]-parseInt(friends[i].scores[j]));
                 
             }
-            // console.log(diffArray);
-            // let max= Math.max(...diffArray)
-            // console.log(max);
-            // console.log("Index of max diffference: "+ diffArray.indexOf(max));
-            // let match = diffArray.indexOf(max);
-            // matchName = friendsArray[match].name;
-            // console.log(matchName);
+            console.log(difference);
+             if (difference < totalDiff){
+                
+                totalDiff = difference;
+                matchName = friends[i].name;
+                matchPhoto = friends[i].photo;
+                console.log(totalDiff);
+                
+             }
+
+
+            
+            
         }
-        friendsArray.push(req.body);
-        res.json(true);
+        friends.push(req.body);
+        console.log(matchName);
+        console.log(matchPhoto);
+        res.json({name:matchName,photo:matchPhoto});
         
     });
 
