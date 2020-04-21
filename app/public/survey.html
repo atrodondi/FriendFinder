@@ -230,14 +230,17 @@
       $.post("/api/friends", newFriend, function (data) {
         if (data) {
           console.log("posted yo");
-        } else {
-          console.log("You are not friendly I guess");
-        }
+          $("#match-name").text(data.name);
+          $("#match-img").attr("src", data.photo);
+          $("#results-modal").modal("toggle");
+
+        } 
 
         $("#name,#photo,#q1,#q2,#q3,#q4,#q5,#q6,#q7,#q8,#q9,#q10").val("");
        
       });
     }
     console.log(newFriend);
+    
   });
 </script>

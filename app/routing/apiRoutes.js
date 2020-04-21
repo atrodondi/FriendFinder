@@ -1,9 +1,11 @@
  var friends = require ("../data/friends");
+ var newMatch = "";
+ var newPhoto="";
 
  module.exports = function(app){
 // when api friends page is visited
     app.get("/api/friends", function(req,res){
-        res.json(friendsArray)
+        res.json(friends)
     });
 
     // listening for a post to api friends, then....
@@ -43,7 +45,9 @@
         }
         friends.push(req.body);
         console.log(matchName);
+        newMatch = matchName;
         console.log(matchPhoto);
+        newPhoto = matchPhoto;
         res.json({name:matchName,photo:matchPhoto});
         
     });
