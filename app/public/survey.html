@@ -15,6 +15,7 @@
   </head>
   <body>
     <div class="container">
+      <!-- survey of questions -->
       <h2>Survey Questions</h2>
       <hr />
 
@@ -189,7 +190,7 @@
           </div>
           <div class="modal-body">
             <h2 id="match-name"></h2>
-            <img id="match-img" src="" alt="" />
+            <img  class = "img-fluid" id="match-img" src="" alt="" />
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">
@@ -201,7 +202,7 @@
     </div>
   </body>
 </html>
-
+<!-- code needed to create new Friend object with info after form submitted -->
 <script type="text/javascript">
   $("#submit").on("click", function (event) {
     event.preventDefault();
@@ -226,7 +227,7 @@
           $("#q10").val().trim(),
         ],
       };
-
+// OOMG FINALLY GOT IT WOOOOOOOO. so this posts the data in the newly created friend object to the API, finds the match on the back end, and then injects the result of that to the users screen and toggles the modal to appear with the injected data :)
       $.post("/api/friends", newFriend, function (data) {
         if (data) {
           console.log("posted yo");
@@ -235,7 +236,7 @@
           $("#results-modal").modal("toggle");
 
         } 
-
+// clears the survey for the next use
         $("#name,#photo,#q1,#q2,#q3,#q4,#q5,#q6,#q7,#q8,#q9,#q10").val("");
        
       });

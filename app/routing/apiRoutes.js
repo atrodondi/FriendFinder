@@ -1,6 +1,4 @@
  var friends = require ("../data/friends");
- var newMatch = "";
- var newPhoto="";
 
  module.exports = function(app){
 // when api friends page is visited
@@ -30,6 +28,7 @@
                 
             }
             console.log(difference);
+                // 
              if (difference < totalDiff){
                 
                 totalDiff = difference;
@@ -43,11 +42,11 @@
             
             
         }
+        // adding the new friend to the friend array in the api end point 
         friends.push(req.body);
         console.log(matchName);
-        newMatch = matchName;
         console.log(matchPhoto);
-        newPhoto = matchPhoto;
+        // sending the data back to client as a JSON object
         res.json({name:matchName,photo:matchPhoto});
         
     });
